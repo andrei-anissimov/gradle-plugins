@@ -11,15 +11,15 @@ tasks.register("sortFiles") {
         Supported sorting types: [timestamp,extension] 
         """.trimIndent()
 
-    val filesFolder = project.findProperty("tasks.files.folder")
-    val filesSortType = project.findProperty("tasks.files.sortType")
-    val filesPluginVersion = project.findProperty("tasks.plugin.files")
+    val filesFolder = property("plugin.files.folder")
+    val filesSortType = property("plugin.files.sortType")
+    val filesPluginVersion = property("plugin.files.version")
 
     logger.info("==================== Sort Files Task ====================")
     logger.info("Properties:")
-    logger.info("tasks.files.folder: $filesFolder")
-    logger.info("tasks.files.sortType: $filesSortType")
-    logger.info("tasks.plugin.files: $filesPluginVersion")
+    logger.info("plugin.files.folder: $filesFolder")
+    logger.info("plugin.files.sortType: $filesSortType")
+    logger.info("plugin.files.version: $filesPluginVersion")
     logger.info("=========================================================")
 
     val projectDir = layout.projectDirectory
