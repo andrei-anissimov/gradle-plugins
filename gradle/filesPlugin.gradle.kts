@@ -4,6 +4,9 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
+val FILES_FOLDER = findProperty("plugin.files.folder")
+val FILES_SORT_TYPE = findProperty("plugin.files.sortType")
+
 tasks.register("sortFiles") {
     group = "files"
     description = """
@@ -11,29 +14,23 @@ tasks.register("sortFiles") {
         Supported sorting types: [timestamp,extension] 
         """.trimIndent()
 
-    val filesFolder = findProperty("plugin.files.folder")
-    val filesSortType = findProperty("plugin.files.sortType")
-    val filesPluginVersion = findProperty("plugin.files.version")
-
     logger.info("==================== Sort Files Task ====================")
-    logger.info("Properties:")
-    logger.info("plugin.files.folder: $filesFolder")
-    logger.info("plugin.files.sortType: $filesSortType")
-    logger.info("plugin.files.version: $filesPluginVersion")
+    logger.info("files folder: $FILES_FOLDER")
+    logger.info("files sort type: $FILES_SORT_TYPE")
     logger.info("=========================================================")
 
     val projectDir = layout.projectDirectory
     val buildDir = layout.buildDirectory
 
-    val inputDir = projectDir.dir("$filesFolder")
+    val inputDir = projectDir.dir("$FILES_FOLDER")
 
-    val keySelector : (File) -> String = when(filesSortType) {
+    val keySelector : (File) -> String = when(FILES_SORT_TYPE) {
         "alphabet" -> SORT_ALPHABETICALLY
         "date" ->  {file -> creationDate(file.lastModified()) }
         "extension" -> { file -> file.extension }
         else -> {
-            logger.error("Unknown sorting type: $filesSortType")
-            throw RuntimeException("Unknown sorting type: $filesSortType")
+            logger.error("Unknown sorting type: $FILES_SORT_TYPE")
+            throw RuntimeException("Unknown sorting type: $FILES_SORT_TYPE")
         }
     }
 
@@ -41,7 +38,7 @@ tasks.register("sortFiles") {
 
     groupedFiles.forEach { (key, files) ->
             files.forEach { file ->
-                val dest = buildDir.dir("$filesFolder/$key/${file.name}").get().asFile.toPath()
+                val dest = buildDir.dir("$FILES_FOLDER/$key/${file.name}").get().asFile.toPath()
                 Files.createDirectories(dest.parent)
                 Files.copy(file.toPath(), dest, StandardCopyOption.REPLACE_EXISTING)
 //            copy {
@@ -57,8 +54,7 @@ tasks.register<Delete>("cleanFiles") {
     description = "clean build/files directory"
 
     logger.info("==================== Clean Files Task ====================")
-    val filesFolder = project.findProperty("tasks.files.folder")
-    val outputDir = layout.buildDirectory.dir("$filesFolder")
+    val outputDir = layout.buildDirectory.dir("$FILES_FOLDER")
     delete(outputDir)
     logger.info("==========================================================")
 }
