@@ -9,7 +9,7 @@ apply(from = "gradle/files-script-plugin.gradle.kts")
 
 gradlePlugin {
     plugins {
-        create("files-plugin") {
+        create("filesPlugin") {
             id = "files-plugin"
             implementationClass = "io.anisand.plugin.files.FilesPlugin"
         }
