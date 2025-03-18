@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter
 val FILES_FOLDER = findProperty("plugin.files.folder")
 val FILES_SORT_TYPE = findProperty("plugin.files.sortType")
 
-tasks.register("sortFiles") {
+tasks.register("sortFiles0") {
     group = "files"
     description = """
         Sorts files in the given directory into build/files subdirectories based on the sorting type.
-        Supported sorting types: [timestamp,extension] 
+        Supported sorting types: [timestamp,extension]
         """.trimIndent()
 
     logger.info("==================== Sort Files Task ====================")
@@ -49,7 +49,7 @@ tasks.register("sortFiles") {
     }
 }
 
-tasks.register<Delete>("cleanFiles") {
+tasks.register<Delete>("cleanFiles0") {
     group = "files"
     description = "clean build/files directory"
 

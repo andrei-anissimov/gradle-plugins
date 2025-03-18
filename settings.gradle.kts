@@ -1,2 +1,8 @@
-rootProject.name = "gradle-plugin-course-assignments"
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenLocal()
+    }
+}
+rootProject.name = "gradle-plugins"
 

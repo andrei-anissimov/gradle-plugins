@@ -4,7 +4,7 @@ import io.anisand.plugin.files.PluginProperties
 import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskAction
 
-class CleanFilesTask : Delete() {
+open class CleanFilesTask : Delete() {
 
     override fun getGroup(): String {
         return "files"

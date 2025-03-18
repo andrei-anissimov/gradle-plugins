@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskAction
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 
-class SortFilesTask : DefaultTask() {
+open class SortFilesTask : DefaultTask() {
 
     override fun getGroup(): String {
         return "files"

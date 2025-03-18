@@ -1,14 +1,16 @@
 plugins {
     kotlin("jvm") version "2.1.10"
     `kotlin-dsl`
+    `maven-publish`
+    id("files-plugin") version "1.0"
 }
 
-apply(from = "gradle/files-plugin.gradle.kts")
+apply(from = "gradle/files-script-plugin.gradle.kts")
 
 gradlePlugin {
     plugins {
         create("files-plugin") {
-            id = "files-plugin-v2"
+            id = "files-plugin"
             implementationClass = "io.anisand.plugin.files.FilesPlugin"
         }
     }
