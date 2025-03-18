@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.1.10"
     `kotlin-dsl`
     `maven-publish`
-    id("files-plugin") version "1.0"
+    id("files-plugin") version "0.1.0"
 }
 
 apply(from = "gradle/files-script-plugin.gradle.kts")
@@ -17,7 +17,7 @@ gradlePlugin {
 }
 
 group = "io.anisand"
-version = "1.0"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
